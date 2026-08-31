@@ -284,7 +284,7 @@
 
   .member{ background:var(--black); position:relative; padding:0; overflow:hidden; transition:transform .25s var(--ease); }
   .member-photo{
-    aspect-ratio:3/3.7; position:relative; overflow:hidden;
+    aspect-ratio:2/3; position:relative; overflow:hidden;
     display:flex; align-items:center; justify-content:center;
   }
   .member-photo .init{
@@ -304,7 +304,7 @@
     position:absolute; top:16px; left:16px; font-family:var(--mono); font-size:10px;
     color:var(--green); letter-spacing:.1em; z-index:3; display:flex; align-items:center; gap:6px;
   }
-  .member-frame-tag::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--green); }
+  .member-frame-tag::before{ content:''; width: 5px; height:5px; border-radius:50%; background:var(--green); }
   .member-body{ padding:22px 22px 26px; border-top:1px solid var(--line); }
   .member-body h4{ font-family:var(--display); font-weight:400; font-size:22px; text-transform:uppercase; }
   .member-role{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--green); margin-top:6px; }
@@ -318,6 +318,8 @@
   .g5{ background:linear-gradient(160deg,#142c12 5%, #0a0a0a 55%); }
   .g6{ background:linear-gradient(150deg,#0e1c11 0%, #0a0a0a 60%); }
   .g7{ background:linear-gradient(160deg,#132513 0%, #0a0a0a 55%); }
+
+
 
   /* ===== about / pull quote ===== */
   .about{ padding:130px 0; border-top:1px solid var(--line); position:relative; }
@@ -564,7 +566,7 @@
         <div class="team-grid reveal">
           <div class="member">
             <!-- FOTO1 -->
-            <div class="member-photo g1" style="background-image:url('');"><span class="member-frame-tag">Frame 01</span><span class="init">NG</span></div>
+            <div class="member-photo g1" style="background-image:url('foto-nicol.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 01</span><span class="init">NG</span></div>
             <div class="member-body">
               <h4>Nicol Gutierrez</h4>
               <div class="member-role"> Directora Creativa</div>
@@ -573,7 +575,7 @@
           </div>
           <div class="member">
             <!-- FOTO2 -->
-            <div class="member-photo g3" style="background-image:url('');"><span class="member-frame-tag">Frame 02</span><span class="init">KC</span></div>
+            <div class="member-photo g3" style="background-image:url('foto-kevinn.jpeg'); background-size:108% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 02</span><span class="init">KC</span></div>
             <div class="member-body">
               <h4>Kevinn Cepeda</h4>
               <div class="member-role">Productor </div>
@@ -582,7 +584,7 @@
           </div>
           <div class="member">
             <!-- FOTO3 -->
-            <div class="member-photo g5" style="background-image:url('');"><span class="member-frame-tag">Frame 03</span><span class="init">MA</span></div>
+            <div class="member-photo g5" style="background-image:url('foto-mariam.jpeg'); background-size:100% auto; background-position:center 45%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 03</span><span class="init">MA</span></div>
             <div class="member-body">
               <h4>Mariam Aguirre</h4>
               <div class="member-role">Diseñadora Gráfica</div>
@@ -591,7 +593,7 @@
           </div>
           <div class="member">
             <!-- FOTO4 -->
-            <div class="member-photo g2" style="background-image:url('');"><span class="member-frame-tag">Frame 04</span><span class="init">SM</span></div>
+            <div class="member-photo g2" style="background-image:url('foto-saray.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 04</span><span class="init">SM</span></div>
             <div class="member-body">
               <h4>Saray Martinez</h4>
               <div class="member-role">Marketing Digital</div>
@@ -600,7 +602,7 @@
           </div>
           <div class="member">
             <!-- FOTO5  -->
-            <div class="member-photo g6" style="background-image:url('');"><span class="member-frame-tag">Frame 05</span><span class="init">AG</span></div>
+            <div class="member-photo g6" style="background-image:url('foto-alexa.jpeg'); background-size:100% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 05</span><span class="init">AG</span></div>
             <div class="member-body">
               <h4>Alexadra Gordillo</h4>
               <div class="member-role">Animadora &amp; Motion Designer</div>
@@ -615,13 +617,13 @@
     <section class="about" id="nosotros">
       <div class="wrap">
         <div class="reveal">
-          <div class="about-label">Nosotros / 2019 — hoy</div>
+          <div class="about-label">Nosotros / 2026</div>
           <!-- ════════════════════════════════════════════════════════
                FOTO DE "NOSOTROS" — sube aquí la foto de equipo/estudio.
                Reemplaza el url('') vacío por la ruta de la imagen,
                ej: url('imagenes/equipo-sevenframe.jpg')
                ════════════════════════════════════════════════════════ -->
-          <div class="about-photo g4" style="background-image:url('');"></div>
+          <div class="about-photo g4" style="background-image:url('foto-grupal.jpeg');"></div>
         </div>
         <div class="reveal">
           <p class="about-quote">Creemos que <span class="accent">un buen fotograma</span> vale más que un rollo entero de contenido genérico.</p>
