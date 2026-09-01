@@ -60,9 +60,10 @@
   .hud .corner.br{ bottom:18px; right:18px; border-bottom:2px solid; border-right:2px solid; }
 
   .hud .tc{
-    position:absolute; top:20px; right:56px;
+    position:absolute; bottom: 20px; right:25px;
     font-family:var(--mono); font-size:11px; letter-spacing:.08em;
     color:var(--muted); display:flex; align-items:center; gap:8px;
+    white-space:nowrap;
   }
   .hud .tc .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green-glow); animation:pulse 1.4s infinite; }
   .hud .tc .lbl{ color:var(--green); }
@@ -72,7 +73,25 @@
     position:absolute; bottom:20px; left:56px;
     font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--muted-2);
   }
-  @media (max-width:720px){ .hud .tc, .hud .fstop{ display:none; } .hud .corner{ width:16px; height:16px; } }
+  @media (max-width:900px){
+    .hud .tc{
+      display:flex;
+      bottom:20px;
+      right:20px;
+      font-size:9px;
+      gap:6px;
+    }
+    .hud .tc .dot{ width:6px; height:6px; }
+    .hud .fstop{ display:none; }
+  }
+  @media (max-width:720px){
+    .hud .tc{
+      bottom:20px;
+      right:25px;
+      font-size:9px;
+    }
+    .hud .corner{ width:16px; height:16px; }
+  }
 
   .hud .reel{
     position:absolute; top:0; left:0; right:0; height:2px; background:rgba(244,244,239,0.06);
@@ -140,8 +159,27 @@
   }
   .nav-cta:hover{ transform:translateY(-2px); box-shadow:0 8px 24px var(--green-dim); }
 
-  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:120; }
-  .burger span{ width:24px; height:2px; background:var(--white); transition:all .3s var(--ease); }
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    z-index:120;
+    position:relative;
+    width:24px;
+    height:24px;
+    justify-content:center;
+  }
+  .burger span{
+    width:24px;
+    height:2px;
+    background:var(--white);
+    transition:transform .3s var(--ease), opacity .2s ease;
+    transform-origin:center;
+  }
+  .burger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .burger.active span:nth-child(2){ opacity:0; }
+  .burger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
   @media (max-width:900px){
     nav.primary ul, .nav-cta{ display:none; }
@@ -287,9 +325,7 @@
     aspect-ratio:2/3; position:relative; overflow:hidden;
     display:flex; align-items:center; justify-content:center;
   }
-  .member-photo .init{
-    font-family:var(--display); font-size:96px; color:rgba(244,244,239,0.08); user-select:none;
-  }
+
   .member-photo::before{
     content:''; position:absolute; inset:0;
     transition:transform .6s var(--ease);
@@ -415,7 +451,7 @@
         </ul>
         <a href="#contacto" class="nav-cta">Iniciar proyecto</a>
       </nav>
-      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+      <div class="burger" id="burger" role="button" tabindex="0" aria-label="Abrir menú" title="Abrir menú"><span></span><span></span><span></span></div>
     </div>
   </header>
 
@@ -435,7 +471,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <div class="hero-frame-count">Bogotá · Productora multimedia · Est. 2019</div>
+        <div class="hero-frame-count">Bogotá · Productora multimedia · Est. 2026</div>
         <h1>
           <span class="line"><span>SEVEN</span></span>
           <span class="line"><span>FRAME</span></span>
@@ -566,7 +602,7 @@
         <div class="team-grid reveal">
           <div class="member">
             <!-- FOTO1 -->
-            <div class="member-photo g1" style="background-image:url('foto-nicol.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 01</span><span class="init">NG</span></div>
+            <div class="member-photo g1" style="background-image:url('foto-nicol.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 01</span></div>
             <div class="member-body">
               <h4>Nicol Gutierrez</h4>
               <div class="member-role"> Directora Creativa</div>
@@ -575,16 +611,16 @@
           </div>
           <div class="member">
             <!-- FOTO2 -->
-            <div class="member-photo g3" style="background-image:url('foto-kevinn.jpeg'); background-size:108% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 02</span><span class="init">KC</span></div>
+            <div class="member-photo g3" style="background-image:url('foto-kevinn.jpeg'); background-size:100% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 02</span></div>
             <div class="member-body">
               <h4>Kevinn Cepeda</h4>
-              <div class="member-role">Desarrollador web</div>
-              <p class="member-bio">Desarrolla todas las piezas web, asegurando una experiencia de usuario óptima.</p>
+              <div class="member-role">Productor </div>
+              <p class="member-bio">Desarrolla pryectos web, asegurandose que cada proyecto sea óptimo.</p>
             </div>
           </div>
           <div class="member">
             <!-- FOTO3 -->
-            <div class="member-photo g5" style="background-image:url('foto-mariam.jpeg'); background-size:100% auto; background-position:center 45%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 03</span><span class="init">MA</span></div>
+            <div class="member-photo g5" style="background-image:url('foto-mariam.jpeg'); background-size:100% auto; background-position:center 45%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 03</span></div>
             <div class="member-body">
               <h4>Mariam Aguirre</h4>
               <div class="member-role">Diseñadora Gráfica</div>
@@ -593,7 +629,7 @@
           </div>
           <div class="member">
             <!-- FOTO4 -->
-            <div class="member-photo g2" style="background-image:url('foto-saray.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 04</span><span class="init">SM</span></div>
+            <div class="member-photo g2" style="background-image:url('foto-saray.jpeg'); background-size:100% auto; background-position:center 48%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 04</span></div>
             <div class="member-body">
               <h4>Saray Martinez</h4>
               <div class="member-role">Marketing Digital</div>
@@ -602,7 +638,7 @@
           </div>
           <div class="member">
             <!-- FOTO5  -->
-            <div class="member-photo g6" style="background-image:url('foto-alexa.jpeg'); background-size:100% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 05</span><span class="init">AG</span></div>
+            <div class="member-photo g6" style="background-image:url('foto-alexa.jpeg'); background-size:100% auto; background-position:center 50%; background-repeat:no-repeat; background-color:#0a0a0a;"><span class="member-frame-tag">Frame 05</span></div>
             <div class="member-body">
               <h4>Alexadra Gordillo</h4>
               <div class="member-role">Animadora &amp; Motion Designer</div>
@@ -720,10 +756,33 @@
   // mobile menu
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
+  function toggleMobileMenu(){
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('active', isOpen);
+    burger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    burger.setAttribute('title', isOpen ? 'Cerrar menú' : 'Abrir menú');
+  }
+
+  function closeMobileMenu(){
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-label', 'Abrir menú');
+    burger.setAttribute('title', 'Abrir menú');
+  }
+
+  burger.addEventListener('click', toggleMobileMenu);
+  burger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMobileMenu();
+    }
   });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
 
   // rolling timecode HUD (24fps)
   const tc = document.getElementById('timecode');
