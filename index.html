@@ -260,11 +260,35 @@
   }
   .section-head p{ margin-top:22px; max-width:520px; color:var(--muted); font-size:16px; line-height:1.7; }
 
-  .reveal{ will-change:opacity, transform; }
+  .reveal{
+    will-change:opacity, transform;
+    opacity:0;
+    transform:translateY(42px) scale(.97);
+    transition:opacity .75s var(--ease), transform .75s var(--ease);
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+  /* Animación para TODOS los elementos de la página */
+  .page-reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .page-reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
 
   /* ===== work ===== */
-  .work{ padding-bottom:60px; }
-  .work-row{ display:grid; gap:2px; margin-bottom:2px; }
+  .work{
+    padding-bottom:60px;
+    padding-left:clamp(12px, 3.5vw, 56px);
+    padding-right:clamp(12px, 3.5vw, 56px);
+  }
+  .work-row{ display:grid; gap:12px; margin-bottom:12px; }
   .work-row.full{ grid-template-columns:1fr; }
   .work-row.split{ grid-template-columns:1.4fr 1fr; }
   @media (max-width:800px){ .work-row.split{ grid-template-columns:1fr; } }
@@ -297,6 +321,71 @@
   .frame-num{
     position:absolute; top:22px; left:26px; z-index:2; font-family:var(--mono); font-size:11px;
     color:rgba(244,244,239,0.75); letter-spacing:.06em;
+  }
+
+
+  /* ===== project videos ===== */
+  .frame-video{
+    position:absolute;
+    inset:-1px;
+    width:calc(100% + 2px);
+    height:calc(100% + 2px);
+    object-fit:cover;
+    display:block;
+    background:#111;
+    transform:scale(1.001);
+  }
+
+  .frame-video-wrap{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:#111;
+  }
+
+  .frame-video-sound{
+    position:absolute;
+    right:22px;
+    top:20px;
+    z-index:5;
+    width:38px;
+    height:38px;
+    border:1px solid rgba(244,244,239,.45);
+    border-radius:50%;
+    background:rgba(10,10,10,.58);
+    color:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    backdrop-filter:blur(7px);
+    transition:background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+  }
+
+  .frame-video-sound:hover{
+    background:var(--green);
+    color:var(--black);
+    border-color:var(--green);
+    transform:scale(1.08);
+  }
+
+  .frame-video-sound svg{
+    width:17px;
+    height:17px;
+    max-width:none;
+  }
+
+  .frame-video-sound .sound-off{ display:none; }
+  .frame-video-sound.muted .sound-on{ display:none; }
+  .frame-video-sound.muted .sound-off{ display:block; }
+
+  @media (max-width:640px){
+    .frame-video-sound{
+      right:14px;
+      top:14px;
+      width:34px;
+      height:34px;
+    }
   }
 
   /* ===== capabilities ===== */
@@ -408,6 +497,14 @@
 
   @media (max-width:640px){
     .wrap{ padding:0 22px; }
+    .work{
+      padding-left:12px;
+      padding-right:12px;
+    }
+    .work-row{
+      gap:10px;
+      margin-bottom:10px;
+    }
     .caps{ padding:80px 0; }
     .section-head{ padding:80px 0 40px; }
     .about, .team, .contact{ padding-top:80px; }
@@ -509,33 +606,68 @@
         <p>Una muestra de proyectos recientes en cine de marca, documental y fotografía de campaña. El resto del carrete, con gusto, en una llamada.</p>
       </div>
 
-      <!-- ══════════════════════════════════════════════════════════════
-           PROYECTOS — sube aquí tus fotos o video de portada.
-           Reemplaza el url('') vacío de cada .tex por la ruta de tu
-           imagen, ej: url('imagenes/turno-de-noche.jpg')
-           Para VIDEO en vez de foto, avísame y cambio el div por un
-           <video autoplay muted loop> — es un ajuste rápido.
-           ══════════════════════════════════════════════════════════════ -->
+      <!-- ===== PROYECTOS =====
+           Para agregar un video:
+           1. Pon el archivo .mp4 en la misma carpeta del HTML (o en una carpeta como videos/).
+           2. Cambia solamente el valor de src.
+           3. El video se reproduce automáticamente al entrar en pantalla,
+              se pausa al salir y empieza de nuevo cuando vuelves a él.
+           4. No tiene controles de play/pausa: solamente aparece el botón de sonido.
+           ================================================ -->
+
       <div class="work-row full reveal">
         <div class="frame">
-          <!-- PROYECTO 1: "Turno de Noche" -->
-            <video class="tex" autoplay muted loop playsinline poster="logo-seven.jpeg">
-              <source src="detras_de_camaras.mp4" type="video/mp4">
+          <!-- VIDEO 1 -->
+          <div class="frame-video-wrap">
+            <video class="frame-video project-video" autoplay muted loop playsinline preload="metadata">
+              <source src="videos/detras _de_camaras.mp4" type="video/mp4">
             </video>
+
+            <button class="frame-video-sound muted" type="button" aria-label="Activar sonido" title="Activar sonido">
+              <svg class="sound-on" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="M16 9.5c1.2 1.2 1.2 3.8 0 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 7c2.6 2.5 2.6 7.5 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <svg class="sound-off" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="m17 9 4 6M21 9l-4 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
           <div class="frame-num">CAM_A / 001</div>
-          <div class="frame-info"><h3>Spot (detrasde cámara)</h3><span class="frame-tag">Cine de marca</span></div>
+          <div class="frame-info"><h3>Spot (detrás de cámara)</h3><span class="frame-tag">Cine de marca</span></div>
         </div>
       </div>
 
       <div class="work-row split reveal">
         <div class="frame">
-          <!-- PROYECTO 2: "Altitud" -->
-          <div class="tex g2" style="background-image:url('');"></div>
+          <!-- VIDEO 2: cambia videos/proyecto-2.mp4 por tu archivo -->
+          <div class="frame-video-wrap">
+            <video class="frame-video project-video" autoplay muted loop playsinline preload="metadata">
+              <source src="videos/proyecto-2.mp4" type="video/mp4">
+            </video>
+
+            <button class="frame-video-sound muted" type="button" aria-label="Activar sonido" title="Activar sonido">
+              <svg class="sound-on" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="M16 9.5c1.2 1.2 1.2 3.8 0 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 7c2.6 2.5 2.6 7.5 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <svg class="sound-off" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="m17 9 4 6M21 9l-4 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
           <div class="frame-num">CAM_B / 002</div>
           <div class="frame-info"><h3>Altitud</h3><span class="frame-tag">Documental</span></div>
         </div>
+
         <div class="frame">
-          <!-- PROYECTO 3: "Solsticio" -->
+          <!-- FOTO 3 -->
           <div class="tex g3" style="background-image:url('');"></div>
           <div class="frame-num">CAM_A / 003</div>
           <div class="frame-info"><h3>Solsticio</h3><span class="frame-tag">Fotografía</span></div>
@@ -544,8 +676,25 @@
 
       <div class="work-row full reveal">
         <div class="frame">
-          <!-- PROYECTO 4: "Control de Tierra" -->
-          <div class="tex g4" style="background-image:url('');"></div>
+          <!-- VIDEO 3: cambia videos/proyecto-3.mp4 por tu archivo -->
+          <div class="frame-video-wrap">
+            <video class="frame-video project-video" autoplay muted loop playsinline preload="metadata">
+              <source src="videos/" type="video/mp4">
+            </video>
+
+            <button class="frame-video-sound muted" type="button" aria-label="Activar sonido" title="Activar sonido">
+              <svg class="sound-on" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="M16 9.5c1.2 1.2 1.2 3.8 0 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 7c2.6 2.5 2.6 7.5 0 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <svg class="sound-off" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+                <path d="m17 9 4 6M21 9l-4 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
           <div class="frame-num">CAM_C / 004</div>
           <div class="frame-info"><h3>Control de Tierra</h3><span class="frame-tag">Video musical</span></div>
         </div>
@@ -553,13 +702,12 @@
 
       <div class="work-row split reveal">
         <div class="frame">
-          <!-- PROYECTO 5: "Larga Exposición" -->
           <div class="tex g5" style="background-image:url('');"></div>
           <div class="frame-num">CAM_A / 005</div>
           <div class="frame-info"><h3>Larga Exposición</h3><span class="frame-tag">Cortometraje</span></div>
         </div>
+
         <div class="frame">
-          <!-- PROYECTO 6: "Litoral" -->
           <div class="tex g6" style="background-image:url('');"></div>
           <div class="frame-num">CAM_B / 006</div>
           <div class="frame-info"><h3>Litoral</h3><span class="frame-tag">Fotografía</span></div>
@@ -673,7 +821,7 @@
       <div class="wrap contact-inner reveal">
         <div class="eyebrow">Hablemos</div>
         <h2>Rodemos<br>algo juntos.</h2>
-        <a href="mailto:hola@sevenframe.studio" class="contact-email">hola@sevenframe.studio →</a>
+        <a href="mailto:sevenframe777@gmail.com" class="contact-email">sevenframe777@gmail.com →</a>
       </div>
     </section>
 
@@ -721,18 +869,8 @@
       f.style.transform = `translateY(${shift}px)`;
     });
 
-    // every section fades in as it nears the center of the screen,
-    // and fades back out as it scrolls away — both scrolling up and down
-    if (!reducedMotion){
-      document.querySelectorAll('.reveal').forEach(el => {
-        const r = el.getBoundingClientRect();
-        const centerEl = r.top + r.height / 2;
-        const dist = centerEl - window.innerHeight / 2;
-        const norm = Math.min(Math.abs(dist) / (window.innerHeight * 0.8), 1);
-        el.style.opacity = 1 - norm * 0.95;
-        el.style.transform = `translateY(${dist > 0 ? norm * 34 : -norm * 34}px) scale(${1 - norm * 0.05})`;
-      });
-    }
+    // Los elementos .reveal se controlan con IntersectionObserver
+    // para que aparezcan al entrar en pantalla tanto al bajar como al subir.
   }
   window.addEventListener('scroll', onScroll, { passive:true });
   window.addEventListener('resize', onScroll);
@@ -822,9 +960,110 @@
     card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 
+
+  // ===== reveal global: toda la página aparece al entrar/salir =====
+  // Se añaden automáticamente todos los elementos visuales importantes.
+  if (!reducedMotion){
+    const globalSelectors = [
+      'header .logo', 'header nav', 'header .burger',
+      '.marquee-wrap',
+      '.hero-frame-count', '.hero-sub', '.hero-meta',
+      '.work .frame',
+      '.caps .cap',
+      '.team .member',
+      '.about-photo', '.about-quote', '.about-foot',
+      '.contact .eyebrow', '.contact h2', '.contact-email',
+      'footer .wrap'
+    ];
+
+    const globalItems = document.querySelectorAll(globalSelectors.join(','));
+    globalItems.forEach((el, i) => {
+      if (!el.classList.contains('reveal')) {
+        el.classList.add('page-reveal');
+        el.style.transitionDelay = `${(i % 5) * 70}ms`;
+      }
+    });
+
+    const globalRevealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -5% 0px'
+    });
+
+    globalItems.forEach(el => globalRevealObserver.observe(el));
+  }
+
+  // ===== reveal: aparecer al entrar en pantalla =====
+  // Funciona al bajar y al subir. Al salir del viewport vuelve a ocultarse
+  // para que pueda aparecer otra vez cuando regreses.
+  const revealItems = document.querySelectorAll('.reveal');
+
+  if (!reducedMotion && revealItems.length){
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      });
+    }, {
+      threshold: 0.14,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealItems.forEach(el => revealObserver.observe(el));
+  } else {
+    revealItems.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // ===== project videos: reproducir al entrar en pantalla =====
+  const projectVideos = document.querySelectorAll('.project-video');
+
+  if (projectVideos.length){
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+
+        if (entry.isIntersecting){
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.45
+    });
+
+    projectVideos.forEach(video => {
+      videoObserver.observe(video);
+
+      const soundButton = video.closest('.frame').querySelector('.frame-video-sound');
+
+      soundButton.addEventListener('click', () => {
+        video.muted = !video.muted;
+
+        soundButton.classList.toggle('muted', video.muted);
+        soundButton.setAttribute(
+          'aria-label',
+          video.muted ? 'Activar sonido' : 'Silenciar video'
+        );
+        soundButton.setAttribute(
+          'title',
+          video.muted ? 'Activar sonido' : 'Silenciar video'
+        );
+
+        if (video.paused) video.play().catch(() => {});
+      });
+    });
+  }
+
   // reduced motion: keep content fully visible, static
   if (reducedMotion) {
-    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.classList.add('is-visible');
+      el.style.opacity = 1;
+      el.style.transform = 'none';
+    });
   }
 </script>
 
